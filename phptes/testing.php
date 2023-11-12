@@ -9,9 +9,7 @@
 
 <body>
     <?php
-        echo'bisa nih <br>';
-        echo'bisa nih <br>';
-        echo'bisa nih <br>';
+
     ?>
 </body>
 
