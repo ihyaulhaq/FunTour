@@ -6,8 +6,8 @@
    
 }
 .form-floating>.form-control, .form-floating>.form-control-plaintext, .form-floating>.form-select {
-    height: calc(2.75rem + calc(var(--bs-border-width) * 2));
-    min-height: calc(2.75rem + calc(var(--bs-border-width) * 2));
+    height: calc(2rem + calc(var(--bs-border-width) * 2));
+    min-height: calc(2rem + calc(var(--bs-border-width) * 2));
     line-height: 1;
 }
 .form-floating>label {
