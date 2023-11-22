@@ -105,57 +105,26 @@ session_start();
       <div class="pt-5">
         <h1>Destinasi Wisata</h1>
       </div>
-      <!-- <?php
-      // $hasil = mysqli_query(,"SELECT destination_name,description FROM destinations")
-      ""
-      ?> -->
       <div class="row row-cols-2 row-cols-md-4 g-0">
+      <?php
+            $hasil = mysqli_query($conn,"SELECT destination_name,description FROM destinations");
+            while ($row = mysqli_fetch_array($hasil)):
+      ?>
         <div class="col g-4">
           <div class="card shadow">
             <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
             <div class="card-body pb-2">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
+              <h5 class="card-title"><?= $row['destination_name'] ?></h5>
+              <p class="card-text"><?= $row['description']?></p>
                 <a href="#" class="stretched-link"> </a>
             </div>
           </div>
         </div>
-        <!-- <div class="col g-4">
-          <div class="card shadow">
-            <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-            <div class="card-body pb-2">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
-                <a href="#" class="stretched-link"></a>
-            </div>
-          </div>
-        </div>
-        <div class="col g-4">
-          <div class="card shadow">
-            <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-            <div class="card-body pb-2">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">TThis is a longer card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
-              <a href="#" class="stretched-link"></a>
-            </div>
-          </div>
-        </div>
-        <div class="col g-4">
-          <div class="card shadow">
-            <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-            <div class="card-body pb-2">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
-                <a href="#" class="stretched-link"></a>
-            </div>
-          </div>
-        </div> -->
+        <?php endwhile ?>
       </div>
     </div>
+
+    
     <!-- card daftar tournya -->
     <div class="container mt-5">
       <div class="mb-5">
