@@ -1,3 +1,7 @@
+<?php
+require_once 'C:/xampp/htdocs/FunTour/connect_db.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,14 +73,14 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img src="assets/images.jpeg" class="d-block w-100" alt="..." style=" object-fit: cover;  height: 500px;">
+            <img src="assets/brobudur.jpg" class="d-block w-100" alt="..." style=" object-fit: cover;  height: 500px;">
             <div class="carousel-caption d-md-block bg-black-carousel">
               <h5>Sumeru</h5>
               <p>Some representative placeholder content for the first slide.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="assets/images.jpeg" class="d-block w-100" alt="..." style="object-fit: cover; height: 500px;">
+            <img src="assets/rinjani.jpg" class="d-block w-100" alt="..." style="object-fit: cover; height: 500px;">
             <div class="carousel-caption d-md-block bg-black-carousel">
               <h5>rinjani</h5>
               <p>Some representative placeholder content for the first slide.</p>
@@ -102,18 +106,25 @@
         <h1>Destinasi Wisata</h1>
       </div>
       <div class="row row-cols-2 row-cols-md-4 g-0">
+      <?php
+      $hasil = mysqli_query($conn,"SELECT destination_name,description FROM destinations");
+      while ($row = mysqli_fetch_array($hasil)):
+        ?>
+        
         <div class="col g-4">
-          <div class="card shadow">
+          <div class="card h-100 shadow">
             <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
             <div class="card-body pb-2">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
+              <h5 class="card-title"><?= $row['destination_name'] ?></h5>
+              <p class="card-text"><?= $row['description']?></p>
                 <a href="#" class="stretched-link"> </a>
             </div>
           </div>
         </div>
-        <div class="col g-4">
+
+      <?php endwhile ?>
+    
+        <!-- <div class="col g-4">
           <div class="card shadow">
             <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
             <div class="card-body pb-2">
@@ -145,7 +156,7 @@
                 <a href="#" class="stretched-link"></a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- card daftar tournya -->
@@ -213,7 +224,7 @@
         </div>
       </div>
     </div>
-
+    <!-- artikel -->
     <div class="container mt-5">
       <div class="mb-5">
         <h1>Panduan Perjalanan</h1>
