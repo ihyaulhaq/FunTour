@@ -1,3 +1,7 @@
+<?php
+require_once 'C:/xampp/htdocs/FunTour/connect_db.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,8 +14,9 @@
   <link rel="stylesheet" href="style-home.css">
 </head>
 
-<body class="bg-dark-subtle">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark-subtle">
+<body class="bg-light-subtle">
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light-subtle">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">FunTour</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -19,12 +24,12 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav  mb-4 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">About</a>
+            <a class="nav-link active" href="/FunTour/about/index.html">About</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
@@ -41,16 +46,20 @@
             </ul>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2 bg-dark-subtle border-dark" type="search" placeholder="Search"
+        <form class="d-flex w-50 mx-auto" role="search">
+          <input class="form-control me-2 bg-white border-dark w-100" type="search" placeholder="Search"
             aria-label="Search">
           <button class="btn btn-outline-dark " type="submit">Search</button>
         </form>
+        <button class="btn btn-dark ms-auto" type="button">
+          <a href="/FunTour/login/login.html" class="link-light text-decoration-none">
+            Log In
+          </a>
+        </button>
       </div>
     </div>
   </nav>
 
-<<<<<<< HEAD
   <div class="text-center">
     <!-- carousel -->
     <div>
@@ -75,48 +84,9 @@
             <div class="carousel-caption d-md-block bg-black-carousel">
               <h5>rinjani</h5>
               <p>Some representative placeholder content for the first slide.</p>
-=======
-  <div class="text-center col-12">
-    <div class="align-items-center">
-      <div class="col-12">
-        <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false"
-          data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="assets/bromo.webp" class="d-block w-100 object-fit-cover" alt="..." style="height: 500px;">
-              <div class="carousel-caption d-md-block">
-                <h5>First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="assets/images.jpeg" class="d-block w-100" alt="..." style="object-fit: cover; height: 500px;">
-              <div class="carousel-caption d-md-block">
-                <h5>second slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="assets/images.jpeg" class="d-block w-100" alt="..." style="object-fit: cover; height: 500px;">
-              <div class="carousel-caption d-md-block">
-                <h5>third slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
-              </div>
->>>>>>> b38dd1a402e613b9897968a55ccc8114e9d5a802
             </div>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
-<<<<<<< HEAD
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching"
           data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -135,6 +105,10 @@
       <div class="pt-5">
         <h1>Destinasi Wisata</h1>
       </div>
+      <!-- <?php
+      // $hasil = mysqli_query(,"SELECT destination_name,description FROM destinations")
+      ""
+      ?> -->
       <div class="row row-cols-2 row-cols-md-4 g-0">
         <div class="col g-4">
           <div class="card shadow">
@@ -147,13 +121,12 @@
             </div>
           </div>
         </div>
-        <div class="col g-4">
+        <!-- <div class="col g-4">
           <div class="card shadow">
             <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
             <div class="card-body pb-2">
               <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                This is a longer card with supporting text below as a natural lead-in to additional
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
                 content. This content is a little bit longer.</p>
                 <a href="#" class="stretched-link"></a>
             </div>
@@ -180,74 +153,150 @@
                 <a href="#" class="stretched-link"></a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- card daftar tournya -->
     <div class="container mt-5">
       <div class="mb-5">
         <h1>Jelajahi Indonesia</h1>
-=======
->>>>>>> b38dd1a402e613b9897968a55ccc8114e9d5a802
       </div>
 
-      <div class="col-md-6 offset-md-3">
-        <div class="pt-4">
-          <h4>destinasi wisata</h4>
-        </div>
-        <div class="row row-cols-1 row-cols-md-3 g-0">
-          <div class="col g-4">
-            <div class="card h-100">
-              <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-              <div class="card-body">
-                <h5 class="card-title">Kepulauan Seribu</h5>
-                <p class="card-text">Kepulauan Seribu adalah gugusan pulau yang terletak di sebelah utara Jakarta, Indonesia, dikenal karena keindahan pantainya dan terumbu karang yang memikat. Terdiri dari sekitar 110 pulau kecil dan besar, area ini menjadi tujuan liburan populer bagi warga Jakarta yang ingin melarikan diri dari hiruk pikuk kota. Pantai-pantai pasir putih, air laut yang jernih, serta kehidupan bawah laut yang kaya menjadikan Kepulauan Seribu sebagai tempat yang ideal untuk aktivitas snorkeling, menyelam, atau sekadar bersantai di tepi pantai. Pulau-pulau ini juga memiliki sejarah yang kaya dan beberapa di antaranya dihuni oleh masyarakat lokal serta menyediakan akomodasi untuk wisatawan.</p>
-              </div>
+      <div class="row row-cols-1 row-cols-md-2 g-0 ">
+        <div class="card mb-4  mx-lg-auto shadow" style="max-width: 510px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="/FunTour/assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
             </div>
-          </div>
-          <div class="col g-4">
-            <div class="card h-100">
-              <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-              <div class="card-body">
-                <h5 class="card-title">Gunung Bromo</h5>
-                <p class="card-text">Gunung Bromo adalah salah satu gunung berapi paling ikonik di Indonesia yang terletak di Taman Nasional Bromo Tengger Semeru, Jawa Timur. Keindahannya tak tertandingi dengan lanskap yang spektakuler, terutama saat matahari terbit di antara kabut yang menyelimuti lembah. Kawah Bromo yang berangsur-angsur aktif terlihat menakjubkan dari ketinggian dan sering kali melepaskan asap putih kecil. Di sekitarnya, padang pasir lautan Pasir Berbisik menambah pesona alami tempat ini, menjadi destinasi yang sangat populer bagi wisatawan lokal maupun mancanegara.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col g-4">
-            <div class="card h-100">
-              <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-              <div class="card-body">
-                <h5 class="card-title">Raja Ampat</h5>
-                <p class="card-text">Raja Ampat adalah surga bagi para penyelam dan pecinta alam. Terletak di ujung barat Papua, Indonesia, gugusan pulau ini terkenal karena keindahan bawah lautnya yang menakjubkan, dengan terumbu karang yang sangat indah dan keanekaragaman hayati yang kaya. Perairan jernihnya memungkinkan Anda melihat kehidupan laut yang luar biasa, mulai dari ikan-ikan warna-warni hingga hiu dan penyu. Di atas permukaan, pemandangan pulau-pulau karang yang hijau dan pantai berpasir putih menambah pesona alam Raja Ampat yang memukau.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col g-4">
-            <div class="card h-100">
-              <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
+            <div class="col-md-8 mx-auto">
               <div class="card-body">
                 <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                  content. This content is a little bit longer.</p>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4 mx-lg-auto shadow" style="max-width: 510px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="/FunTour/assets/rumah.jpeg" class=" h-100 w-100 rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4 mx-lg-auto shadow" style="max-width: 510px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="/FunTour/assets/bromo.webp" class="h-100 w-100 rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title mx-auto">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4 mx-lg-auto shadow" style="max-width: 510px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="/FunTour/assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- artikel -->
+    <div class="container mt-5">
+      <div class="mb-5">
+        <h1>Panduan Perjalanan</h1>
+      </div>
+
+      <div class="row row-cols-1 row g-0 ">
+        <div class="card mb-3 shadow" style="max-width: 510 px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-3 shadow" style="max-width: 510 px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-3 shadow" style="max-width: 510 px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
-
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 
 </body>
 
-<footer>
-  <div class="text-center bg-black text-light mt-4 p-5">
-    <p>hubungi kami &copy;</p>
+<footer >
+  <div class="text-center bg-black text-light pt-5 pb-3">
+    <div class="container-fluid">
+      <div>
+        <div class="col-lg-12">
+          <h6>  FUNTOUR</h6>
+        </div>
+        <div class="col-lg-12">
+          <P>Kebijakan Cookie | Kebijakan Privasi | Syarat dan Ketentuan </P>
+        </div>
+      </div>
+      <div class="col-lg-12 pt-5">
+        <p>hubungi kami <a href="#" class="link-light">disini</a> </p>
+      </div>
+    </div>
+
   </div>
 </footer>
 
