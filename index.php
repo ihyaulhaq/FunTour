@@ -121,44 +121,11 @@ session_start();
             </div>
           </div>
         </div>
-
-      <?php endwhile ?>
-    
-        <!-- <div class="col g-4">
-          <div class="card shadow">
-            <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-            <div class="card-body pb-2">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
-                <a href="#" class="stretched-link"></a>
-            </div>
-          </div>
-        </div>
-        <div class="col g-4">
-          <div class="card shadow">
-            <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-            <div class="card-body pb-2">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">TThis is a longer card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
-              <a href="#" class="stretched-link"></a>
-            </div>
-          </div>
-        </div>
-        <div class="col g-4">
-          <div class="card shadow">
-            <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-            <div class="card-body pb-2">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
-                <a href="#" class="stretched-link"></a>
-            </div>
-          </div>
-        </div> -->
+        <?php endwhile ?>
       </div>
     </div>
+
+    
     <!-- card daftar tournya -->
     <div class="container mt-5">
       <div class="mb-5">
