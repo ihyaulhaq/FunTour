@@ -100,147 +100,147 @@ session_start();
       </div>
     </div>
 
-    <!-- card tengah pilihn destinasi -->
-    <div class="col-md-9 col-sm-4 container-fluid font-card-tengah justify-content-center">
-      <div class="pt-5">
-        <h1>Destinasi Wisata</h1>
-      </div>
-      <div class="row row-cols-2 row-cols-md-4 g-0">
-      <?php
-      $hasil = mysqli_query($conn,"SELECT destination_name,description FROM destinations");
-      while ($row = mysqli_fetch_array($hasil)):
-        ?>
-        
-        <div class="col g-4">
-          <div class="card h-100 shadow">
-            <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
-            <div class="card-body pb-2">
-              <h5 class="card-title"><?= $row['destination_name'] ?></h5>
-              <p class="card-text"><?= $row['description']?></p>
-                <a href="#" class="stretched-link"> </a>
-            </div>
-          </div>
+    <div class="container">    
+      <!-- card tengah pilihn destinasi -->
+      <div class="col-md-9 col-sm-4 container-fluid font-card-tengah justify-content-center">
+        <div class="pt-5">
+          <h1>Destinasi Wisata</h1>
         </div>
-        <?php endwhile ?>
-      </div>
-    </div>
-
-    
-    <!-- card daftar tournya -->
-    <div class="container mt-5">
-      <div class="mb-5">
-        <h1>Jelajahi Indonesia</h1>
-      </div>
-
-      <div class="row row-cols-1 row-cols-md-2 g-0 ">
-        <div class="card mb-4  mx-lg-auto shadow" style="max-width: 510px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="/FunTour/assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
-            </div>
-            <div class="col-md-8 mx-auto">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        <div class="row row-cols-2 row-cols-md-4 g-0">
+        <?php
+        $hasil = mysqli_query($conn,"SELECT destination_name,description FROM destinations");
+        while ($row = mysqli_fetch_array($hasil)):
+          ?>
+          
+          <div class="col g-4">
+            <div class="card h-100 shadow">
+              <img src="assets/bromo.webp" class="card-img-top" alt="assets/bromo.webp">
+              <div class="card-body pb-2">
+                <h5 class="card-title"><?= $row['destination_name'] ?></h5>
+                <p class="card-text"><?= $row['description']?></p>
+                  <a href="#" class="stretched-link"> </a>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card mb-4 mx-lg-auto shadow" style="max-width: 510px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="/FunTour/assets/rumah.jpeg" class=" h-100 w-100 rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body mx-auto">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card mb-4 mx-lg-auto shadow" style="max-width: 510px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="/FunTour/assets/bromo.webp" class="h-100 w-100 rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title mx-auto">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card mb-4 mx-lg-auto shadow" style="max-width: 510px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="/FunTour/assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
+          <?php endwhile ?>
         </div>
       </div>
-    </div>
-    <!-- artikel -->
-    <div class="container mt-5">
-      <div class="mb-5">
-        <h1>Panduan Perjalanan</h1>
+      <!-- card daftar tournya -->
+      <div class="container mt-5">
+        <div class="mb-5">
+          <h1>Jelajahi Indonesia</h1>
+        </div>
+  
+        <div class="row row-cols-1 row-cols-md-2 g-0 ">
+          <div class="card mb-4  mx-lg-auto shadow" style="max-width: 510px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="/FunTour/assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
+              </div>
+              <div class="col-md-8 mx-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-4 mx-lg-auto shadow" style="max-width: 510px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="/FunTour/assets/rumah.jpeg" class=" h-100 w-100 rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body mx-auto">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-4 mx-lg-auto shadow" style="max-width: 510px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="/FunTour/assets/bromo.webp" class="h-100 w-100 rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title mx-auto">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-4 mx-lg-auto shadow" style="max-width: 510px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="/FunTour/assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="row row-cols-1 row g-0 ">
-        <div class="card mb-3 shadow" style="max-width: 510 px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+      <!-- artikel -->
+      <div class="container mt-5">
+        <div class="mb-5">
+          <h1>Panduan Perjalanan</h1>
+        </div>
+  
+        <div class="row row-cols-1 row g-0 ">
+          <div class="card mb-3 shadow" style="max-width: 510 px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card mb-3 shadow" style="max-width: 510 px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          <div class="card mb-3 shadow" style="max-width: 510 px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card mb-3 shadow" style="max-width: 510 px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          <div class="card mb-3 shadow" style="max-width: 510 px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="assets/rumah.jpeg" class="h-100 w-100 rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
               </div>
             </div>
           </div>
+  
         </div>
-
       </div>
     </div>
 
