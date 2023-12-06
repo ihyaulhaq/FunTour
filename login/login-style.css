@@ -1,18 +1,29 @@
-.gambar-bg{
+.gambar-bg {
     background-image: url(/FunTour/assets/latar.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-   
+
 }
-.form-floating>.form-control, .form-floating>.form-control-plaintext, .form-floating>.form-select {
+
+.form-floating>.form-control,
+.form-floating>.form-control-plaintext,
+.form-floating>.form-select {
     height: calc(2rem + calc(var(--bs-border-width) * 2));
     min-height: calc(2rem + calc(var(--bs-border-width) * 2));
     line-height: 1;
 }
+
 .form-floating>label {
     padding: .5rem;
 }
-.font-kecil{
+
+.font-kecil {
     font-size: 13px;
+}
+.error{
+    background: #F2DEDE;
+    color: #A94442;
+    text-align: center;
+    border-radius:5px
 }
