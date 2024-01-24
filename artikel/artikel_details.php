@@ -5,7 +5,23 @@ session_start();
 $isLoggedIn = isset($_SESSION['user_id']);
 $article_id = $_GET['id'];
 
-$query = "SELECT * FROM articles WHERE article_id = '$article_id'";
+// $author_query = mysqli_query($conn, "SELECT articles.author_id, users.username
+// FROM articles
+// INNER JOIN users ON users.user_id = articles.author_id");
+
+// $history_data = array();
+// while ($row_Author = mysqli_fetch_assoc($author_query)) {
+//     $history_data[] = $row_Author;
+// }
+
+// $query = "SELECT * FROM articles WHERE article_id = '$article_id'";
+// $result = mysqli_query($conn, $query);
+// $row = mysqli_fetch_assoc($result);
+$query = "SELECT articles.*, users.username
+    FROM articles
+    INNER JOIN users ON users.user_id = articles.author_id
+    WHERE articles.article_id = '$article_id'";
+
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
 ?>
@@ -20,8 +36,10 @@ $row = mysqli_fetch_assoc($result);
 </head>
 
 <body class="bg-light-subtle">
+
+
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light-subtle">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light-subtle shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand" href="../">FunTour</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,10 +51,10 @@ $row = mysqli_fetch_assoc($result);
                         <a class="nav-link active" aria-current="page" href="../">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/FunTour/about/index.html">About</a>
+                        <a class="nav-link active" href="../about/">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href=" ">Tour</a>
+                        <a class="nav-link active" href="../tour/">Tour</a>
                     </li>
                 </ul>
                 <?php if ($isLoggedIn) :
@@ -51,7 +69,7 @@ $row = mysqli_fetch_assoc($result);
                     </div>
                 <?php else : ?>
                     <button class="btn btn-dark ms-auto" type="button">
-                        <a href="./login/login-page.php" class="link-light text-decoration-none">
+                        <a href="../login/login-page.php" class="link-light text-decoration-none">
                             Log In
                         </a>
                     </button>
@@ -65,30 +83,34 @@ $row = mysqli_fetch_assoc($result);
     <div class="container py-5">
         <div class="row">
             <div class="col-12">
-                <h1 class="mb-3">
+                <h1 class="mx-2">
                     <strong>
                         <?= $row['title'] ?>
                     </strong>
                 </h1>
-                <img src=".<?= $row['image_url'] ?>" alt="<?= $row['title'] ?>" class="rounded-4 h-100 w-100 object-fit-cover p-2 object-position-center center" style="max-height: 700px;">
+                <p class="mx-2 mt-0">
+                Penulis: <?= $row['username'] ?>
+                </p>
+                <img src="<?= $row['image_url'] ?>" alt="<?= $row['title'] ?>" class="rounded-4 h-100 w-100 object-fit-cover p-2 object-position-center center" style="max-height: 700px;">
             </div>
-            <div class="col-12 mt-3">
-
-                <textarea class="mt-5">
+            <div class="col-12 mt-2">
+                <textarea class="mt-5 w-100 border-white overflow-hidden bg-white" style="resize: none;" disabled>
                     <?= $row['content'] ?>
                 </textarea>
-
-
-
-
-            </div>
+            </  div>
         </div>
 
     </div>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        const textareas = document.querySelectorAll('.mt-5.w-100.border-white');
 
+        for (const textarea of textareas) {
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+    </script>
 
 </body>
 

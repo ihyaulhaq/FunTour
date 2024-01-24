@@ -6,8 +6,12 @@ session_start();
 $items_per_page = 4; // Number of items to display per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get the current page number or default to page 1
 $start_from = ($page - 1) * $items_per_page; // Calculate the starting point for fetching data
+$destination_id = $_GET['id'];
 
 $isLoggedIn = isset($_SESSION['user_id']);
+
+$destinasi_query = mysqli_query($conn, "SELECT destination_name  FROM destinations WHERE destination_id = $destination_id");
+$hasil_destinasi = mysqli_fetch_assoc($destinasi_query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +20,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <title>Tour|FunTour</title>
+  <title>Tour | FunTour</title>
   <link rel="stylesheet" href="style-home.css">
 </head>
 
@@ -37,7 +41,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <a class="nav-link active" href="../about/">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../tour/">Tour</a>
+            <a class="nav-link active" href="./">Tour</a>
           </li>
         </ul>
         <?php if ($isLoggedIn) :
@@ -67,19 +71,20 @@ $isLoggedIn = isset($_SESSION['user_id']);
     <!-- card daftar tournya -->
     <div class="container-fluid col-11 mt-5 justify-content-center mb-4">
       <div class="mb-5">
-        <h1>Jelajahi Indonesia</h1>
+        <h1>Wisata <?= $hasil_destinasi['destination_name'] ?></h1>
       </div>
 
       <div class="row row-cols-1 row-cols-lg-2 g-0 ">
         <?php
-        $total_query = mysqli_query($conn, "SELECT COUNT(*) as total FROM tours");
+        $total_query = mysqli_query($conn, "SELECT COUNT(*) as total FROM tours WHERE destination_id = $destination_id");
         $total_row = mysqli_fetch_assoc($total_query);
         $total_pages = ceil($total_row['total'] / $items_per_page);
 
-        $query = "SELECT * FROM tours ORDER BY tour_id DESC LIMIT  $start_from, $items_per_page";
+        $query = "SELECT * FROM tours WHERE destination_id = $destination_id  LIMIT $start_from, $items_per_page";
 
         $hasil_t = mysqli_query($conn, $query);
         while ($row = mysqli_fetch_array($hasil_t)) :
+          $rowID = $row['tour_id'];
         ?>
           <div class="card mb-4 mx-auto shadow" style="max-width: 543px; ">
             <div class="row g-0 w-100 h-100">
@@ -107,23 +112,24 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
       <!-- pagination -->
       <div class="d-flex justify-content-center mt-4">
+        <?php $rowID = mysqli_fetch_assoc($hasil_t) ?>
         <nav aria-label="Page navigation">
           <ul class="pagination">
             <!-- sebelum -->
             <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>"">
-              <a class="page-link" href="?page=<?= ($page - 1) ?>" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
+              <a class=" page-link" href="?page=<?= ($page - 1) ?>&id=<?= $destination_id ?>" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
             <!-- halaman -->
             <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
               <li class="page-item <?= ($page == $i) ? 'active' : '' ?>">
-                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                <a class="page-link" href="?page=<?= $i ?>&id=<?= $destination_id ?>"><?= $i ?></a>
               </li>
             <?php endfor; ?>
             <!-- next -->
             <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : '' ?>">
-              <a class="page-link" href="?page=<?= ($page + 1) ?>" aria-label="Next">
+              <a class="page-link" href="?page=<?= ($page + 1) ?>&id=<?= $destination_id ?>" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>

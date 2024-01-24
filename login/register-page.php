@@ -8,9 +8,8 @@ session_start();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <title>Register | FunTour</title>
   <link rel="stylesheet" href="register-style.css">
-  <title>Register|FunTour</title>
-
 </head>
 
 <body class="gambar-back d-flex justify-content-center align-items-center min-vh-100">
@@ -23,11 +22,21 @@ session_start();
           </div>
           <div class="card-body">
             <form action="register.php" method="post">
-              <div class="mb-4 form-floating">
-                <input type="text" class="form-control border-black" name="username" id="username" placeholder="Enter username" required>
-                <label for="username" class="font-kecil">Username</label>
+              <div class="">
+                <?php if (isset($_SESSION['error'])) : ?>
+                  <p class="error mb-0"> <?php echo $_SESSION['error']; ?> </p>
+                <?php
+                  session_destroy();
+                endif;
+                ?>
               </div>
-              <div class="row mb-4">
+
+              <div class="mb-4">
+                <label for="username" class="">Username</label>
+                <input type="text" class="form-control border-black" name="username" id="username" placeholder="Enter username" required>
+              </div>
+
+              <div class="row mb-4 mt-5">
                 <div class="col">
                   <input type="text" class="form-control border-black" name="first_name" placeholder="First name" aria-label="First name">
                 </div>
@@ -35,27 +44,28 @@ session_start();
                   <input type="text" class="form-control border-black" name="last_name" placeholder="Last name" aria-label="Last name">
                 </div>
               </div>
-              <div class="mb-4 form-floating">
+
+              <div class="mb-4">
+                <label for="phone" class="">Phone</label>
                 <input type="number" class="form-control border-black" name="phone" id="phone" placeholder="Enter phone" required>
-                <label for="phone" class="font-kecil">Phone</label>
               </div>
-              <div class="mb-4 form-floating">
+              <div class="mb-4">
+                <label for="address" class="">Address</label>
                 <input type="text" class="form-control border-black h-100" name="address" id="address" placeholder="Enter address" required>
-                <label for="address" class="font-kecil">Address</label>
               </div>
-              <div class="mb-4 form-floating">
+              <div class="mb-4">
+                <label for="email" class="">Email</label>
                 <input type="email" class="form-control border-black" name="email" id="email" placeholder="Enter email" required>
-                <label for="email" class="font-kecil">Email</label>
               </div>
-              <div class="mb-4 form-floating">
+              <div class="mb-4">
+                <label for="password" class="">Password</label>
                 <input type="password" class="form-control border-black" name="password" id="password" placeholder="Enter password" required>
-                <label for="password" class="font-kecil">Password</label>
               </div>
               <div class="mb-3">
                 <button type="submit" class="btn btn-dark container">Register</button>
               </div>
               <div class="text-center font-kecil">
-                <p>Sudah punya akun? <a href="login.html" class="text-decoration-none">Log in</a></p>
+                <p>Sudah punya akun? <a href="login-page.php" class="text-decoration-none">Log in</a></p>
               </div>
           </div>
           </form>

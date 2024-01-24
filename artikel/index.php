@@ -2,8 +2,8 @@
 require_once '../connect_db.php';
 session_start();
 // $isLoggedIn = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
-// $username = $isLoggedIn ? $_SESSION['username'] : 'Guest';'
-$items_per_page = 4; // Number of items to display per page
+// $username = $isLoggedIn ? $_SESSION['username'] : 'Guest';
+$items_per_page = 5; // Number of items to display per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get the current page number or default to page 1
 $start_from = ($page - 1) * $items_per_page; // Calculate the starting point for fetching data
 
@@ -40,6 +40,15 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <a class="nav-link active" href="../tour/">Tour</a>
           </li>
         </ul>
+        <!-- <form class="d-flex w-50 mx-auto" role="search">
+          <input class="form-control me-2 bg-white border-dark w-100" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-dark " type="submit">Search</button>
+        </form> -->
+        <!-- <button class="btn btn-dark ms-auto" type="button">
+          <a href="./login/login-page.php" class="link-light text-decoration-none">
+            Log In
+          </a>
+        </button> -->
         <?php if ($isLoggedIn) :
           $username = $_SESSION['username'];
           $user_id = $_SESSION['user_id'];
@@ -64,47 +73,39 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
 
   <div class="container-fluid">
-    <!-- card daftar tournya -->
-    <div class="container-fluid col-11 mt-5 justify-content-center mb-4">
+    <!-- artikel -->
+    <div class="container-fluid col-md-11 mt-5 justify-content-center">
       <div class="mb-5">
-        <h1>Jelajahi Indonesia</h1>
+        <h1>Panduan Perjalanan</h1>
       </div>
 
-      <div class="row row-cols-1 row-cols-lg-2 g-0 ">
+      <div class="row row-cols-1 row g-0 ">
         <?php
-        $total_query = mysqli_query($conn, "SELECT COUNT(*) as total FROM tours");
+        $total_query = mysqli_query($conn, "SELECT COUNT(*) as total FROM articles");
         $total_row = mysqli_fetch_assoc($total_query);
         $total_pages = ceil($total_row['total'] / $items_per_page);
 
-        $query = "SELECT * FROM tours ORDER BY tour_id DESC LIMIT  $start_from, $items_per_page";
+        $query = "SELECT * FROM articles ORDER BY article_id DESC LIMIT $start_from, $items_per_page";
 
         $hasil_t = mysqli_query($conn, $query);
         while ($row = mysqli_fetch_array($hasil_t)) :
         ?>
-          <div class="card mb-4 mx-auto shadow" style="max-width: 543px; ">
-            <div class="row g-0 w-100 h-100">
+          <div class="card mb-3 shadow" style="width: 90vw;">
+            <div class="row g-0 ">
               <div class="col-md-4">
-                <img src="<?= $row['image_url'] ?>" class="rounded-start h-100 w-100 object-fit-cover d-block" style="height: auto;" alt="...">
+                <img src="<?= $row['image_url'] ?>" class="h-100 w-100 rounded-start object-fit-cover object-position-center center" style="max-height: 300px;" alt="...">
               </div>
-              <div class="col-md-8 mx-auto text-start">
-                <div class="card-body">
-                  <h4 class="card-title"> <?= $row['tour_name'] ?> </h4>
-                  <p class="card-text"><?= substr($row['description'], 0, 100) . (strlen($row['description']) > 100 ? '...' : '') ?></p>
-                  <p class=" card-text "><b>tanggal</b> : <br><?= $row['start_date'] ?> s.d. <?= $row['end_date'] ?></p>
-                  <p class=" card-text "><b>harga</b> : <br>Rp.<?= number_format($row['price'], 0, ',', ',')  ?></p>
-                  <div class=" d-flex">
-                    <button class=" btn btn-dark ms-auto m-3">
-                      <a href="./tour_details.php?id=<?= $row['tour_id'] ?>" class="link-light text-decoration-none">lihat selengkapnya</a>
-                    </button>
-                  </div>
-
+              <div class="col-md-8">
+                <div class="card-body text-start">
+                  <h2 class="card-title"><?= $row['title'] ?></h2>
+                  <p class="card-text"><?= substr($row['content'], 0, 400) . (strlen($row['content']) > 400 ? '...' : '') ?></p>
+                  <a href="../artikel/artikel_details.php?id=<?= $row['article_id'] ?>" class="stretched-link"></a>
                 </div>
               </div>
             </div>
           </div>
         <?php endwhile ?>
       </div>
-
       <!-- pagination -->
       <div class="d-flex justify-content-center mt-4">
         <nav aria-label="Page navigation">

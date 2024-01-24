@@ -76,6 +76,7 @@ function insertArticleData()
         if ($success) {
             // Data inserted successfully
             // echo "Article added successfully!";
+            $_SESSION['message_artikel_bisa'] = "<script>alert('berhasil menambahkan ARTIKEL')</script>";
             header("Location: index.php");
             exit();
             // Redirect or perform further actions if needed

@@ -4,14 +4,16 @@ session_start();
 // $user_id = $_SESSION['user_id'];
 // $verf_id = mysqli_query($conn, "SELECT * FROM users WHERE user_id = '$user_id'");
 $isLoggedIn = isset($_SESSION['user_id']);
+$sql_d = "SELECT destination_id, destination_name FROM destinations";
+$result_d = mysqli_query($conn, $sql_d);
 
 if (!isset($_GET['id'])) {
     header("Location: index.php");
     exit;
 }
 
-$tour_id = $_GET['id'];
-$query = "SELECT * FROM tours WHERE tour_id = '$tour_id'";
+$article_id = $_GET['id'];
+$query = "SELECT * FROM articles WHERE article_id = '$article_id'";
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
 ?>
@@ -24,7 +26,7 @@ $row = mysqli_fetch_assoc($result);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>Edit|FunTour</title>
+    <title>Edit | FunTour</title>
 </head>
 
 <body>
@@ -44,24 +46,22 @@ $row = mysqli_fetch_assoc($result);
                         <a class="nav-link active" href="../about/">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./tour/">Tour</a>
+                        <a class="nav-link active" href="../tour/">Tour</a>
                     </li>
-
                 </ul>
-
                 <?php if ($isLoggedIn) :
                     $username = $_SESSION['username'];
                     $user_id = $_SESSION['user_id'];
                 ?>
                     <div class="ms-auto">
                         <img src="../assets/profileplcholder.jpg" alt="" class="rounded-circle img-fluid" style="width: 43px;">
-                        <a href="./profile/" class="text-black ms-auto navbar-text">
+                        <a href="../profile/" class="text-black ms-auto navbar-text">
                             <?= $username ?>
                         </a>
                     </div>
                 <?php else : ?>
                     <button class="btn btn-dark ms-auto" type="button">
-                        <a href="./login/login-page.php" class="link-light text-decoration-none">
+                        <a href="../login/login-page.php" class="link-light text-decoration-none">
                             Log In
                         </a>
                     </button>
@@ -69,52 +69,46 @@ $row = mysqli_fetch_assoc($result);
             </div>
         </div>
     </nav>
-
+    <!-- form nya -->
     <div class="container justify-content-center mt-5">
         <div class=" text-center">
-            <h2> Edit Tour</h2>
+            <h2>Edit artikel</h2>
         </div>
-        <form action="edit_logic.php" class="row need" method="post" enctype="multipart/form-data" novalidate>
-            <input type="hidden" name="tour_id" value="<?= $tour_id ?>">
-
+        <form action="edit_logic.php" class="row" method="post" enctype="multipart/form-data" novalidate>
+        <input type="hidden" name="article_id" value="<?= $article_id ?>">
             <!-- judul tournya -->
             <div class="col-12 mt-2">
-                <label for="tour_name" class="form-label ms-3">Nama tour</label>
-                <input type="text" class="form-control border-black rounded-5 shadow-sm" value="<?= $row['tour_name'] ?>" id="tour_name" name="tour_name" placeholder="Nama tour anda" required>
+                <label for="title" class="form-label ms-3">Judul</label>
+                <input type="text" class="form-control border-black rounded-5 shadow-sm" id="title" name="title" value="<?= $row['title'] ?>"placeholder="Judul artikel anda" required>
+
             </div>
-            <!-- kapasitas -->
-            <div class="col-6 mt-2">
-                <label for="max_capacity" class="form-label ms-3">Kapasitas orang</label>
-                <input type="number" class="form-control border-black rounded-5 shadow-sm" value="<?= $row['max_capacity'] ?>" id="max_capacity" name="max_capacity" required>
-            </div>
-            <!--tgl mulai  -->
-            <div class="col-6 mt-2">
-                <label for="start_date" class="form-label ms-3">Tanggal mulai</label>
-                <input type="date" class="form-control border-black rounded-5 shadow-sm" value="<?= $row['start_date'] ?>" id="start_date" name="start_date">
-            </div>
-            <!-- tanggal kelar -->
-            <div class="col-6 mt-2">
-                <label for="end_date" class="form-label ms-3">Tanggal selesai</label>
-                <input type="date" class="form-control border-black rounded-5 shadow-sm" value="<?= $row['end_date'] ?>" id="end_date" name="end_date">
-            </div>
-            <!-- harganya -->
+            <!-- detinasi -->
             <div class="col-12 mt-2">
-                <label for="price" class="form-label ms-3">Harga</label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text rounded-start-5 border-black">Rp.</span>
-                    <input type="number" class="form-control rounded-end-5 border-black" value="<?= $row['price'] ?>" id="price" name="price">
-                </div>
+                <label for="destinations" class="form-label ms-3">Destinasi Wisata</label>
+                <div class="input-group">
+                    <select class="form-select rounded-5 border-black" id="destination_id" name="destination_id">
+                        <option selected>Choose...</option>
+                        <?php
+                        // Loop through the results and populate the dropdown
+                        if (mysqli_num_rows($result_d) > 0) {
+                            while ($rowD = mysqli_fetch_assoc($result_d)) {
+                                echo "<option value='" . $rowD["destination_id"] . "'>" . $rowD["destination_name"] . "</option>";
+                            }
+                        } else {
+                            echo "<option value=''>No destinations found</option>";
+                        }
+                        ?>
+                    </select>
+                </div>            
             </div>
             <!-- penjelasan -->
             <div class="col-12 mt-2">
-                <label for="description" class="form-label ms-3">Deskripsi</label>
-                <textarea name="description" id="description" cols="30" rows="10" class="form-control border-black rounded-5 shadow-sm" placeholder="penjelasan singkat"><?= $row['description'] ?> </textarea>
+                <label for="content" class="form-label ms-3">Artikel</label>
+                <textarea name="content" id="content" cols="30" rows="50" class="form-control border-black rounded-5 shadow-sm" placeholder="Isi artikel anda"><?= $row['content']?></textarea>
             </div>
-
             <div class="col-3 mx-auto mt-5">
                 <button type="submit" class="form-control btn btn-dark">Submit</button>
             </div>
-
         </form>
     </div>
 

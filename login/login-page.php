@@ -34,13 +34,13 @@ session_start();
                 endif;
                 ?>
               </div>
-              <div class="mb-4 form-floating">
-                <input type="text" class="form-control border-black font-kecil" id="username" name="username" placeholder="Enter username">
-                <label for="username" class="font-kecil">Username</label>
+              <div class="mb-4">
+                <input type="text" class="form-control border-black font-kecil" id="username" name="username" placeholder="Username">
+                <!-- <label for="username" class="font-kecil">Username</label> -->
               </div>
-              <div class="mb-4 form-floating">
-                <input type="password" class="form-control border-black font-kecil" id="password" name="password" placeholder="Enter password">
-                <label for="password" class="font-kecil">Password</label>
+              <div class="mb-4">
+                <input type="password" class="form-control border-black font-kecil" id="password" name="password" placeholder="Password">
+                <!-- <label for="password" class="font-kecil">Password</label> -->
               </div>
               <div class="mb-3">
                 <button type="submit" class="btn btn-dark container" name="login">Login</button>

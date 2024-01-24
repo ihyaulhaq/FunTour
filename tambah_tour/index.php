@@ -1,8 +1,17 @@
+
 <?php
 require_once '../connect_db.php';
 session_start();
 // $isLoggedIn = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
 // $username = $isLoggedIn ? $_SESSION['username'] : 'Guest';
+if(!isset($_SESSION['user_id'])){
+    header("Location: ../");
+    exit();
+}
+if ($_SESSION['user_type'] !== 'admin'){
+    header("Location: ../");
+    exit();
+}
 $isLoggedIn = isset($_SESSION['user_id']);
 $sql_d = "SELECT destination_id, destination_name FROM destinations";
 $result_d = mysqli_query($conn, $sql_d);
@@ -32,18 +41,12 @@ $result_d = mysqli_query($conn, $sql_d);
                         <a class="nav-link active" aria-current="page" href="../">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/FunTour/about/index.html">About</a>
+                        <a class="nav-link active" href="../">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="../tour/">About</a>
                     </li>
                 </ul>
-
-                <!-- <button class="btn btn-dark ms-auto" type="button">
-          <a href="./login/login-page.php" class="link-light text-decoration-none">
-            Log In
-          </a>
-        </button> -->
                 <?php if ($isLoggedIn) :
                     $username = $_SESSION['username'];
                     $user_id = $_SESSION['user_id'];
@@ -64,6 +67,12 @@ $result_d = mysqli_query($conn, $sql_d);
             </div>
         </div>
     </nav>
+    <?php
+    if (isset($_SESSION['message_tambah_tour'])) {
+        echo $_SESSION['message_tambah_tour'];
+        unset($_SESSION['message_tambah_tour']); // Remove the session variable after displaying the message
+    }
+    ?>
 
     <div class="container justify-content-center mt-5">
         <div class=" text-center">
@@ -76,8 +85,7 @@ $result_d = mysqli_query($conn, $sql_d);
                 <input type="text" class="form-control border-black rounded-5 shadow-sm" id="tour_name" name="tour_name" placeholder="Nama tour anda" required>
                 <?php if (isset($_SESSION['message'])) : ?>
                     <p class=" "> <?php echo $_SESSION['message']; ?> </p>
-                <?php
-                    session_destroy();
+                <?php                    
                 endif;
                 ?>
             </div>
@@ -137,13 +145,6 @@ $result_d = mysqli_query($conn, $sql_d);
             <div class="col-3 mx-auto mt-5">
                 <button type="submit" class="form-control btn btn-dark">Submit</button>
             </div>
-            <script>
-                // Check if the PHP variable $message is set and not empty
-                <?php if (isset($message)): ?>
-                    // Display the message in a JavaScript alert
-                    alert("<?= $_SESSION['message']; ?>");
-                <?php endif; ?>
-            </script>
         </form>
     </div>
 

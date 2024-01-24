@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check for empty fields
     if (empty($username) || empty($email) || empty($password) || empty($address) || empty($phone)) {
-        $_SESSION['error'] = "lease fill in all required fields.";
+        $_SESSION['error'] = "Semua harus diisi";
         header("Location: register-page.php");
         exit();
     }
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conn, $check_query);
 
     if (mysqli_num_rows($result) > 0) {
-        $_SESSION['error'] = "Email or username already exists!";
+        $_SESSION['error'] = "Email atau username sudah ada!";
         header("Location: register-page.php");
         exit();
     }
@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($row['email'] == $email) {
                 $_SESSION['user_id'] = $row['user_id'];
                 $_SESSION['username'] = $row['username'];
+                $_SESSION['user_type'] = $row['user_type'];
             }
         }
         $_SESSION['success'] = "Akun berhasil dibuat, silahkan login";

@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
     $max_capacity = $_POST['max_capacity'];
-    $current_capacity = $max_capacity;
+    $current_capacity = 0;
     $price = $_POST['price'];
     $description = $_POST['description'];
     $author_id = $_SESSION['user_id'];
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: index.php");
         exit();
     } else {
-        $targetDir = "./assets/img_tour/";
+        $targetDir = "../assets/img_tour/";
         $targetFile = $targetDir . basename($_FILES["image_url"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (mysqli_stmt_execute($stmt)) {
             
-            $_SESSION['message'] = "New record added successfully";
+            $_SESSION['message_tambah_tour'] = "<script>alert('berhasil menambahkan TOUR')</script>";
             header("Location: index.php");
         } else {
             $_SESSION['message'] = "Error: " . mysqli_error($conn);
@@ -72,7 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$user_id = $_SESSION['user_id'];
 
 
 

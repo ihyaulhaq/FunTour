@@ -1,6 +1,14 @@
 <?php
 require_once '../connect_db.php';
 session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: ../");
+    exit();
+}
+if ($_SESSION['user_type'] !== 'admin'){
+    header("Location: ../");
+    exit();
+}
 $isLoggedIn = isset($_SESSION['user_id']);
 $sql_d = "SELECT destination_id, destination_name FROM destinations";
 $result_d = mysqli_query($conn, $sql_d);
@@ -17,6 +25,12 @@ $result_d = mysqli_query($conn, $sql_d);
 </head>
 
 <body class="bg-light-subtle">
+<?php
+    if (isset($_SESSION['message_artikel_bisa'])) {
+        echo $_SESSION['message_artikel_bisa'];
+        unset($_SESSION['message_artikel_bisa']); // Remove the session variable after displaying the message
+    }
+    ?>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light-subtle">
         <div class="container-fluid">
@@ -30,7 +44,7 @@ $result_d = mysqli_query($conn, $sql_d);
                         <a class="nav-link active" aria-current="page" href="../">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/FunTour/about/index.html">About</a>
+                        <a class="nav-link active" href="../about/">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="../tour/">Tour</a>

@@ -20,8 +20,14 @@ $row = mysqli_fetch_assoc($result);
 </head>
 
 <body class="bg-light-subtle">
+    <?php
+    if (isset($_SESSION['berhasil_reservasi'])) {
+        echo $_SESSION['berhasil_reservasi'];
+        unset($_SESSION['berhasil_reservasi']); // Remove the session variable after displaying the message
+    }
+    ?>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light-subtle">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light-subtle shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand" href="../">FunTour</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,21 +39,12 @@ $row = mysqli_fetch_assoc($result);
                         <a class="nav-link active" aria-current="page" href="../">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/FunTour/about/index.html">About</a>
+                        <a class="nav-link active" href="../about/">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href=" ">Tour</a>
+                        <a class="nav-link active" href="../tour/">Tour</a>
                     </li>
                 </ul>
-                <!-- <form class="d-flex w-50 mx-auto" role="search">
-          <input class="form-control me-2 bg-white border-dark w-100" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-dark " type="submit">Search</button>
-        </form> -->
-                <!-- <button class="btn btn-dark ms-auto" type="button">
-          <a href="./login/login-page.php" class="link-light text-decoration-none">
-            Log In
-          </a>
-        </button> -->
                 <?php if ($isLoggedIn) :
                     $username = $_SESSION['username'];
                     $user_id = $_SESSION['user_id'];
@@ -60,7 +57,7 @@ $row = mysqli_fetch_assoc($result);
                     </div>
                 <?php else : ?>
                     <button class="btn btn-dark ms-auto" type="button">
-                        <a href="./login/login-page.php" class="link-light text-decoration-none">
+                        <a href="../login/login-page.php" class="link-light text-decoration-none">
                             Log In
                         </a>
                     </button>
@@ -74,7 +71,7 @@ $row = mysqli_fetch_assoc($result);
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-6">
-                <img src=".<?= $row['image_url'] ?>" alt="<?= $row['tour_name'] ?>" class="rounded-5 h-100 w-100 object-fit-cover p-2">
+                <img src="<?= $row['image_url'] ?>" alt="<?= $row['tour_name'] ?>" class="rounded-5 h-100 w-100 object-fit-cover p-2">
             </div>
             <div class="col-lg-6 mt-5">
                 <h2>
@@ -85,13 +82,12 @@ $row = mysqli_fetch_assoc($result);
                 <p>
                     <?= $row['description'] ?>
                 </p>
-
-                <!-- Price and Stock -->
+                <!-- detail -->
                 <div class="product-details mt-3">
                     <p class=" card-text "><b>tanggal :</b><br>
                         <?= $row['start_date'] ?> <b>s.d.</b> <?= $row['end_date'] ?></p>
                     <p><strong>Harga:</strong><br> Rp.
-                        <?= $row['price'] ?>
+                        <?= number_format($row['price'], 0, ',', ',') ?>
                     </p>
                     <p><strong>kapasitas orang:</strong><br>
                         <?= $row['max_capacity'] ?> orang
@@ -101,19 +97,52 @@ $row = mysqli_fetch_assoc($result);
                     </p>
                 </div>
 
-                <!-- Quantity Input -->
                 <div class="d-flex">
                     <button class="btn btn-outline-dark" onclick="decrease()" title="Decrease">-</button>
-                    <input type="number" class="form-control w-25" name="quantity" id="quantity" value="0" oninput="validateQuantity(<?= $row['max_capacity'] ?>)">
-                    <button class="btn btn-outline-dark" onclick="increase(<?= $row['max_capacity'] ?>)" title="Increase">+</button>
+                    <input type="number" class="form-control w-25" name="quantity" id="quantity" value="0" oninput="updateQuantity(<?= $row['max_capacity'] ?>)">
+                    <button class="btn btn-outline-dark" onclick="increase(<?= $row['max_capacity'] - $row['current_capacity'] ?>)" title="Increase">+</button>
+                </div>
+
+                <form method="POST" action="reservasi.php">
+                    <!-- Add hidden fields to store information -->
+                    <input type="hidden" name="tour_id" value="<?= $tour_id ?>">
+                    <input type="hidden" name="price" value="<?= $row['price'] ?>">
+                    <input type="hidden" name="tanggal_beli" value="<?= date('Y-m-d H:i:s') ?>">
+                    <input type="hidden" name="hidden_quantity" value="0">
+
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons mt-4">
+                        <?php if ($isLoggedIn) : ?>
+                            <button type="submit" class="btn btn-dark" name="reservasi">Reservasi sekarang</button>
+
+                        <?php else : ?>
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Reservasi sekarang</button>
+
+                        <?php endif; ?>
+                    </div>
+                </form>
+
+                <!-- modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center fs-5 ">
+                                Anda harus login
+                            </div>
+                            <div class="modal-footer border-0 ">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-dark"> <a href="../login/login-page.php" class="link-light text-decoration-none">Login</a></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
-
-                <!-- Action Buttons -->
-                <div class="action-buttons mt-4">
-                    <button class="btn btn-dark">Reservasi sekarang</button>
-                </div>
             </div>
         </div>
 
@@ -121,6 +150,7 @@ $row = mysqli_fetch_assoc($result);
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     <script>
         function increase(limit) {
             var quantityInput = document.getElementById("quantity");
@@ -128,9 +158,12 @@ $row = mysqli_fetch_assoc($result);
 
             if (!isNaN(currentVal) && currentVal < limit) {
                 quantityInput.value = currentVal + 1;
+                updateQuantity(limit); // Update hidden input field value
+                updateButtonState();
             } else {
-                // Jika currentVal lebih dari atau sama dengan limit, atur nilainya menjadi limit
                 quantityInput.value = limit;
+                updateQuantity(limit); // Update hidden input field value
+                updateButtonState();
             }
         }
 
@@ -140,29 +173,51 @@ $row = mysqli_fetch_assoc($result);
 
             if (!isNaN(currentVal) && currentVal > 0) {
                 quantityInput.value = currentVal - 1;
+                updateQuantity(); // Update hidden input field value
+                updateButtonState();
             } else {
-                // Jika currentVal kurang dari atau sama dengan 0, atur nilainya menjadi 0
                 quantityInput.value = 0;
+                updateQuantity(); // Update hidden input field value
+                updateButtonState();
             }
         }
 
-        function validateQuantity(limit) {
+        function updateQuantity(limit) {
             var quantityInput = document.getElementById("quantity");
+            var hiddenQuantityInput = document.querySelector('input[name="hidden_quantity"]');
             var currentVal = parseInt(quantityInput.value);
 
             if (!isNaN(currentVal)) {
                 if (currentVal > limit) {
-                    // Jika nilai lebih besar dari limit, atur nilainya menjadi limit
                     quantityInput.value = limit;
+                    hiddenQuantityInput.value = limit; // Update hidden input field value
                 } else if (currentVal < 0) {
-                    // Jika nilai kurang dari 0, atur nilainya menjadi 0
                     quantityInput.value = 0;
+                    hiddenQuantityInput.value = 0; // Update hidden input field value
+                } else {
+                    hiddenQuantityInput.value = currentVal; // Update hidden input field value
                 }
             } else {
-                // Jika nilai bukan angka, atur nilainya menjadi 0
                 quantityInput.value = 0;
+                hiddenQuantityInput.value = 0; // Update hidden input field value
             }
         }
+
+        function updateButtonState() {
+            var quantity = parseInt(document.getElementById("quantity").value);
+            var reservasiButton = document.querySelector('button[name="reservasi"]');
+
+            if (quantity === 0) {
+                reservasiButton.disabled = true; // Disable button
+            } else {
+                reservasiButton.disabled = false; // Enable button
+            }
+        }
+
+        // Initial button state check on page load
+        window.onload = function() {
+            updateButtonState();
+        };
     </script>
 
 </body>
